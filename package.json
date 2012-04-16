@@ -1,0 +1,9 @@
+{
+	"name": "deminuut",
+	"version": "0.0.0-git",
+	"dependencies": {
+		"express": "2.5.6",
+		"pubnub": "3.1.5",
+		"jade": "0.20.1"
+	}
+}

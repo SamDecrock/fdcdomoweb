@@ -1,0 +1,51 @@
+html,body{
+	position: relative;
+	font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+	font-size: 14px;
+	color: #333333;
+	border:none;
+	background-color: #e2e3db;
+}
+
+button{
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+}
+
+body, html{
+	width: 100%;
+	height: 100%;
+}
+
+.event{
+	cursor: pointer;
+}
+
+.event:hover{
+	background-color: gray;
+}
+
+.door > .open{
+	color: green;
+}
+
+.door > .closed{
+	color: gray;
+}
+
+.on{
+	color: yellow;
+}
+
+.off{
+	color: gray;
+}
+
+.motionsensor > .movement{
+	color: red;
+}
+
+.motionsensor > .nothing{
+	color: gray;
+}

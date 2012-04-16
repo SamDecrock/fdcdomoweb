@@ -1,285 +1,33 @@
 /**
  * Settings
  */
-var terminalSettings = {
-	host: '192.168.240.27',
-	port: 9200,
-	terminalNumber: 1001
-}
+var config = require('./config');
 
-var devices = {
-	'9903038': {
-		type: "door",
-		name: "carport",
-		0: "open",
-		1: "closed",
-		default: "closed"
-	},
-
-	'9903038': {
-		type: "door",
-		name: "carport",
-		0: "open",
-		1: "closed",
-		default: "closed"
-	},
-
-	'9903037': {
-		type: "door",
-		name: "keuken",
-		0: "open",
-		1: "closed",
-		default: "closed"
-	},
-
-	'9903020': {
-		type: "door",
-		name: "living",
-		0: "closed",
-		1: "open",
-		default: "closed"
-	},
-
-	'9903026': {
-		type: "door",
-		name: "voordeur",
-		0: "open",
-		1: "closed",
-		default: "closed"
-	},
-
-	'9903023': {
-		type: "motionsensor",
-		name: "gang",
-		0: "movement",
-		1: "nothing",
-		default: "nothing"
-	},
-
-	'9903024': {
-		type: "motionsensor",
-		name: "living",
-		0: "movement",
-		1: "nothing",
-		default: "nothing"
-	},
-
-	'9903025': {
-		type: "motionsensor",
-		name: "luifel straat",
-		0: "nothing",
-		1: "movement",
-		default: "nothing"
-	},
-
-	'9904014': {
-		type: "light",
-		name: "zitbank tuin",
-		0: "off",
-		1: "on",
-		default: "off"
-	},
-
-	'9904031': {
-		type: "light",
-		name: "gang beneden",
-		0: "off",
-		1: "on",
-		default: "off"
-	},
-
-	'9904017': {
-		type: "light",
-		name: "lampen bij lindebomen",
-		0: "off",
-		1: "on",
-		default: "off"
-	},
-
-	'9904015': {
-		type: "light",
-		name: "padlampjes",
-		0: "off",
-		1: "on",
-		default: "off"
-	},
-
-	'9904026': {
-		type: "light",
-		name: "tuin vooraan",
-		0: "off",
-		1: "on",
-		default: "off"
-	},
-
-	'9904018': {
-		type: "light",
-		name: "tuinhuis",
-		0: "off",
-		1: "on",
-		default: "off"
-	},
-
-	'9904054': {
-		type: "light",
-		name: "keuken",
-		0: "off",
-		1: "on",
-		default: "off"
-	},
-
-	'9904056': {
-		type: "light",
-		name: "keuken tuin",
-		0: "off",
-		1: "on",
-		default: "off"
-	},
-
-	'9904059': {
-		type: "light",
-		name: "living",
-		0: "off",
-		1: "on",
-		default: "off"
-	},
-
-	'9904062': {
-		type: "light",
-		name: "luifel tuin",
-		0: "off",
-		1: "on",
-		default: "off"
-	},
-
-	'9904072': {
-		type: "light",
-		name: "salon",
-		0: "off",
-		1: "on",
-		default: "off"
-	},
-
-	'9904044': {
-		type: "light",
-		name: "keuken aanrecht",
-		0: "off",
-		1: "on",
-		default: "off"
-	},
-
-	'9904081': {
-		type: "light",
-		name: "uplight living",
-		0: "off",
-		1: "on",
-		default: "off"
-	},
-
-	'9904006': {
-		type: "socket",
-		name: "netstekker 4",
-		0: "off",
-		1: "on",
-		default: "off"
-	},
-
-	'9904004': {
-		type: "device",
-		name: "pc",
-		0: "off",
-		1: "on",
-		default: "off"
-	},
-
-	'9904005': {
-		type: "device",
-		name: "printer",
-		0: "off",
-		1: "on",
-		default: "off"
-	},
-
-	'9904016': {
-		type: "device",
-		name: "vijver",
-		0: "off",
-		1: "on",
-		default: "off"
-	},
-
-	'9904013': {
-		type: "waterpump",
-		name: "grondwater",
-		0: "off",
-		1: "on",
-		default: "off"
-	},
-
-	'9904012': {
-		type: "waterpump",
-		name: "regenwater",
-		0: "off",
-		1: "on",
-		default: "off"
-	},
-
-	'9904019': {
-		type: "waterpump",
-		name: "vijver",
-		0: "off",
-		1: "on",
-		default: "off"
-	}
-};
-
-var events = {
-	'EV14,4079': {
-		type: "light",
-		name: "lichten tuinhuis"
-	},
-
-	'EV14,3013': {
-		type: "light",
-		name: "lichten salon"
-	},
-
-	'EV14,3016': {
-		type: "light",
-		name: "lichten salon harder"
-	},
-
-	'EV14,3018': {
-		type: "light",
-		name: "lichten salon zachter"
-	},
-
-	'EV14,3017': {
-		type: "device",
-		name: "printer aansteken"
-	}
-}
+var devices = config.devices;
+var events = config.events;
 
 var translatedDevices = {};
 buildTranslatedDevices();
-pushUpdate();
-console.log(events);
+//console.log(convertToArray(translatedDevices));
+//console.log(events);
 
 
 /**
  * Start Logic
  */
 var net = require('net');
-
+var express = require('express');
+var pubnub 	= require("pubnub");
+var pubnubNetwork = pubnub.init(config.pubnub);
 
 //Socket die met domotica verbindt:
 var client = new net.Socket();
-client.connect(terminalSettings.port, terminalSettings.host, function() {
+client.connect(config.terminalSettings.port, config.terminalSettings.host, function() {
 
-    console.log('CONNECTED TO: ' + terminalSettings.host + ':' + terminalSettings.port);
+    console.log('CONNECTED TO: ' + config.terminalSettings.host + ':' + config.terminalSettings.port);
     
     //Terminualnumber doorsturen:
-	sendCommand("TN" + terminalSettings.terminalNumber);
+	sendCommand("TN" + config.terminalSettings.terminalNumber);
 });
 
 //Binnenkomende data op socket:
@@ -354,7 +102,7 @@ function parseCommand(commandString){
 		var rawstate = commandString.substring(7);
 		updateDevice(devicenr, rawstate);
 	}else{
-		console.log(commandString);
+		console.log("RESPONSE: " + commandString);
 	}
 }
 
@@ -369,34 +117,116 @@ function buildTranslatedDevices(){
 		//type en name kopieren naar translatedDevices:
 		translatedDevices[devicenr] = {
 			type: device.type,
-			name: device.name
-		}
-
-		//state is afhankelijk van wat er in z'n rawstate zit:
-		if(device.rawstate){
-			translatedDevices[devicenr].state = device[device.rawstate];
-		}else{
-			translatedDevices[devicenr].state = device.default;
+			name: device.name,
+			id: devicenr,
+			state: device.default
 		}
 	}
-
-	return translatedDevices;
 }
 
 function updateDevice(devicenr, rawstate){
-	var device = devices['devicenr'];
+	var device = devices[devicenr];
 
 	if(device){
-		//als de rawstate veranderd is of er was nog geen:
-		if(device.rawstate != rawstate || !device.rawstate){
+		if(!device.rawstate){
+			//als er nog geen rawstate was:
+			device.rawstate = rawstate;
+			translatedDevices[devicenr].state = device[rawstate];
+
+			//als die verschillende is van de defaultstate, update doorsturen:
+			if(translatedDevices[devicenr].state != device.default){
+				pushUpdate(translatedDevices[devicenr]);
+			}
+		}else if(device.rawstate != rawstate){
+			//als de rawstate veranderd is:
 			device.rawstate = rawstate;
 
 			translatedDevices[devicenr].state = device[device.rawstate];
-			pushUpdate();
+			pushUpdate(translatedDevices[devicenr]);
 		}
 	}
 }
 
-function pushUpdate(){
-	console.log(translatedDevices);
+function pushUpdate(device){
+	console.log(device);
+
+	pubnubNetwork.publish({
+		channel: "deviceupdates",
+		message: device
+	});	
 }
+
+/**
+ * Webserver stuff:
+ */
+ var webserver = module.exports = express.createServer();
+ webserver.configure(function(){
+	webserver.use(express.bodyParser());
+	var oneYear = 31536000000; //1 year in ms
+	webserver.use(express.static(__dirname + '/public', { maxAge : oneYear})); 
+	webserver.use(express.cookieParser());
+	webserver.use(express.session({cookie: { path: '/', httpOnly: false, maxAge: null }, secret:'fdcdomo'}));
+	webserver.use(express.methodOverride());
+	webserver.use(webserver.router);
+});
+webserver.configure('development', function(){
+	webserver.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
+});
+webserver.configure('production', function(){
+	webserver.use(express.errorHandler()); 
+});
+if (!module.parent) {
+	webserver.listen(config.webserver.port || 3000);
+	console.log("Express server listening on port %d", webserver.address().port);
+}
+
+
+
+/**
+ * REST interfaces
+ */
+webserver.get('/rest/getdevices', function(req, res) {
+	//items terugsturen naar de browser:
+	res.writeHead(200, {'content-type': 'text/json' });
+	res.write(JSON.stringify(convertToArray(translatedDevices))); 
+	res.end('\n');
+});
+
+webserver.get('/rest/getevents', function(req, res) {
+	//items terugsturen naar de browser:
+	res.writeHead(200, {'content-type': 'text/json' });
+	res.write(JSON.stringify(events)); 
+	res.end('\n');
+});
+
+webserver.post('/rest/sendevent', function(req, res){
+	var eventId = req.body.id;
+
+	sendCommand(eventId);
+});
+
+
+function convertToArray(associativeArray){
+	var array = [];
+
+	for (var objectId in associativeArray)
+	{
+		array.push(associativeArray[objectId]);
+	}
+	return array;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
