@@ -1,6 +1,7 @@
 Webinterface voor domotica FDC:
 
 - Node.js installeren: http://nodejs.org/
+- cd naar map met app.js
 - eenmalig "npm install" draaien vanop commandline (om de nodige packages te installeren)
 - eventueel config.js aanpassen
 - "node app.js" draaien om alles te starten
