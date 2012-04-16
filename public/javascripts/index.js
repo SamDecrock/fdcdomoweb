@@ -1,9 +1,6 @@
 window.App = {
 	start: function(){
-		console.log("started");
-
-
-		//Backbone Collection of shared items:
+		//Backbone Collection:
 		App.devices = new App.Devices();
 		App.events = new App.Events();
 
@@ -11,7 +8,7 @@ window.App = {
 		App.devicesView = new App.DevicesView();
 		App.eventsView = new App.EventsView();
 
-		//fetchen van devices:
+		//fetchen van devices en events:
 		App.devices.fetch();
 		App.events.fetch();
 
@@ -81,7 +78,10 @@ App.Device = Backbone.Model.extend({
 
 App.Devices = Backbone.Collection.extend({
 	model: App.Device,
-	url: '/rest/getdevices'
+	url: '/rest/getdevices',
+	comparator: function(device) {
+	  	return device.get("type");
+	}
 });
 
 
