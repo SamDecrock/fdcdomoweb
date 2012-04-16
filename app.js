@@ -203,6 +203,10 @@ webserver.post('/rest/sendevent', function(req, res){
 	var eventId = req.body.id;
 
 	sendCommand(eventId);
+
+	res.writeHead(200, {'content-type': 'text/json' });
+	res.write(JSON.stringify("command send")); 
+	res.end('\n');
 });
 
 
