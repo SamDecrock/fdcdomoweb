@@ -261,7 +261,7 @@ this.events = [
 this.pubnub = { 
 	publish_key: "pub-d771bca5-7a5f-40e3-a002-878c188678be",
 	subscribe_key: "sub-771b1c8a-429f-11e1-b189-69c52471178d",
-	secret_key: "sec-d724efab-ff91-4df4-9399-59372cea5faf",
+	secret_key: "",
 	ssl: false,
 	origin: "pubsub.pubnub.com",
 }
