@@ -232,29 +232,34 @@ this.devices = {
 
 this.events = [
 	{
+		id: "EV14,4046",
+		type: "light",
+		name: "zitbank tuin"
+	},
+	{
+		id: "EV14,3022",
+		type: "light",
+		name: "gang beneden"
+	},
+	{
+		id: "EV14,4058",
+		type: "light",
+		name: "lampen bij lindebomen"
+	},
+	{
+		id: "EV14,4067",
+		type: "light",
+		name: "padlampjes"
+	},
+	{
+		id: "EV14,4078",
+		type: "light",
+		name: "tuin vooraan"
+	},
+	{
 		id: "EV14,4079",
 		type: "light",
 		name: "tuinhuis"
-	},
-	{
-		id: "EV14,3013",
-		type: "light",
-		name: "salon"
-	},
-	{
-		id: "EV14,3016",
-		type: "light",
-		name: "salon harder"
-	},
-	{
-		id: "EV14,3018",
-		type: "light",
-		name: "salon zachter"
-	},
-	{
-		id: "EV14,3017",
-		type: "device",
-		name: "printer aansteken"
 	},
 	{
 		id: "EV14,3029",
@@ -277,15 +282,45 @@ this.events = [
 		name: "luifel tuin"
 	},
 	{
-		id: "EV14,4046",
+		id: "EV14,3013",
 		type: "light",
-		name: "zitbank tuin"
+		name: "salon"
 	},
 	{
-		id: "EV14,3022",
+		id: "EV14,3016",
 		type: "light",
-		name: "gang beneden"
-	}
+		name: "salon harder"
+	},
+	{
+		id: "EV14,3018",
+		type: "light",
+		name: "salon zachter"
+	},
+	{
+		id: "EV14,4044",
+		type: "light",
+		name: "keuken aanrecht (werkt precies niet)"
+	},
+	{
+		id: "EV14,4081",
+		type: "light",
+		name: "uplight living (werkt precies niet)"
+	},
+	{
+		id: "EV14,4064",
+		type: "socket",
+		name: "netstekker 4"
+	},
+	{
+		id: "EV14,3015",
+		type: "device",
+		name: "pc aan"
+	},
+	{
+		id: "EV14,3017",
+		type: "device",
+		name: "printer aan"
+	},
 ]
 
 this.pubnub = { 
