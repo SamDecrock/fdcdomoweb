@@ -234,27 +234,57 @@ this.events = [
 	{
 		id: "EV14,4079",
 		type: "light",
-		name: "lichten tuinhuis"
+		name: "tuinhuis"
 	},
 	{
 		id: "EV14,3013",
 		type: "light",
-		name: "lichten salon"
+		name: "salon"
 	},
 	{
 		id: "EV14,3016",
 		type: "light",
-		name: "lichten salon harder"
+		name: "salon harder"
 	},
 	{
 		id: "EV14,3018",
 		type: "light",
-		name: "lichten salon zachter"
+		name: "salon zachter"
 	},
 	{
 		id: "EV14,3017",
 		type: "device",
 		name: "printer aansteken"
+	},
+	{
+		id: "EV14,3029",
+		type: "light",
+		name: "keuken"
+	},
+	{
+		id: "EV14,3028",
+		type: "light",
+		name: "keuken tuin"
+	},
+	{
+		id: "EV14,3014",
+		type: "light",
+		name: "living"
+	},
+	{
+		id: "EV14,3031",
+		type: "light",
+		name: "luifel tuin"
+	},
+	{
+		id: "EV14,4046",
+		type: "light",
+		name: "zitbank tuin"
+	},
+	{
+		id: "EV14,3022",
+		type: "light",
+		name: "gang beneden"
 	}
 ]
 
