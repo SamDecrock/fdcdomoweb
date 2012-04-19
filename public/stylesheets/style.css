@@ -49,3 +49,15 @@ body, html{
 .motionsensor > .nothing{
 	color: gray;
 }
+
+#viewport{
+	position: relative;
+	height: 2300px;
+	line-height: 2300px;
+	width: 2400px;
+	text-align: center;
+}
+
+#floorplan{
+
+}
