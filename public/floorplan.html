@@ -5,27 +5,28 @@
 		<meta name="viewport" content="width=device-width", content="width=device-width" />
 		<meta charset="utf-8" />
 
-		<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+		<script src="http://cdn.pubnub.com/pubnub-3.1.min.js" pub-key="pub-d771bca5-7a5f-40e3-a002-878c188678be" sub-key="sub-771b1c8a-429f-11e1-b189-69c52471178d" ssl="off" origin="pubsub.pubnub.com" id="pubnub"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		
+		<script src="javascripts/underscore-min.js"></script>
+		<script src="javascripts/backbone.js"></script>
+		<script src="javascripts/floorplan.js"></script>
+
 		
 		<link rel="stylesheet" href="stylesheets/reset.css" />
 		<link rel="stylesheet" href="stylesheets/style.css" />	
 
-		<script type="text/javascript">
-			$(function(){
-
-
-
-
-			});
-
-
-		</script>
 	</head>
 	
 	<body>
-		<img id="floorplan" src="images/lights_salon_on.svg" />
 		<div id="viewport">
-			<img id="floorplan" src="images/floorplan.svg" />
+			<div id="floorplanwrapper">
+				<img id="floorplan" src="images/floorplan.svg" />
+				<img id="9904072" style="top: 500px; left: 620px;" src="images/lights_big-3pair_off.svg" /><!-- salon -->
+				<img id="9904026" style="top: 410px; left: 760px;" src="images/lights_small-4vertical_off.svg" /><!-- tuin vooraan -->
+				<img id="9904056" style="top: 270px; left: 750px;" src="images/lights_big-4vertical_off.svg" /><!-- keuken tuin -->
+				<img id="9904054" style="top: 300px; left: 625px;" src="images/lights_big-3pair_off.svg" /><!-- keuken -->
+			</div>
 		</div>
 	</body>
 </html>

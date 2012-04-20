@@ -58,6 +58,32 @@ body, html{
 	text-align: center;
 }
 
-#floorplan{
-
+#floorplanwrapper{
+	position: relative;
+	height: 800px;
+	width: 2300px;
+	display: inline-block;
 }
+
+#floorplanwrapper > img{
+	position: absolute;
+}
+
+#floorplan{
+	position: absolute;
+	left: 0px;
+	right: 0px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

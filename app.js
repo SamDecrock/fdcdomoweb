@@ -22,7 +22,7 @@ var pubnubNetwork = pubnub.init(config.pubnub);
 
 //Socket die met domotica verbindt:
 var client = new net.Socket();
-/*
+
 client.connect(config.terminalSettings.port, config.terminalSettings.host, function() {
 
     console.log('CONNECTED TO: ' + config.terminalSettings.host + ':' + config.terminalSettings.port);
@@ -31,7 +31,6 @@ client.connect(config.terminalSettings.port, config.terminalSettings.host, funct
 	sendCommand("TN" + config.terminalSettings.terminalNumber);
 });
 
-*/
 
 //Binnenkomende data op socket:
 client.on('data', function(data) {
