@@ -232,14 +232,29 @@ this.devices = {
 
 this.events = [
 	{
-		id: "EV14,4046",
+		id: "EV14,3030",
 		type: "light",
-		name: "zitbank tuin"
+		name: "keuken aanrecht"
 	},
 	{
 		id: "EV14,3022",
 		type: "light",
 		name: "gang beneden"
+	},
+	{
+		id: "EV14,3029",
+		type: "light",
+		name: "keuken"
+	},
+	{
+		id: "EV14,3028",
+		type: "light",
+		name: "keuken tuin"
+	},
+	{
+		id: "EV14,4046",
+		type: "light",
+		name: "bank tuin"
 	},
 	{
 		id: "EV14,4058",
@@ -260,16 +275,6 @@ this.events = [
 		id: "EV14,4079",
 		type: "light",
 		name: "tuinhuis"
-	},
-	{
-		id: "EV14,3029",
-		type: "light",
-		name: "keuken"
-	},
-	{
-		id: "EV14,3028",
-		type: "light",
-		name: "keuken tuin"
 	},
 	{
 		id: "EV14,3014",
@@ -297,14 +302,9 @@ this.events = [
 		name: "salon zachter"
 	},
 	{
-		id: "EV14,4044",
+		id: "EV14,3012",
 		type: "light",
-		name: "keuken aanrecht (werkt precies niet)"
-	},
-	{
-		id: "EV14,4081",
-		type: "light",
-		name: "uplight living (werkt precies niet)"
+		name: "uplight living"
 	},
 	{
 		id: "EV14,4064",
@@ -320,7 +320,7 @@ this.events = [
 		id: "EV14,3017",
 		type: "device",
 		name: "printer aan"
-	},
+	}
 ]
 
 this.pubnub = { 

@@ -1,5 +1,12 @@
 window.App = {
 	start: function(){
+		/*
+		$("#floorplanwrapper").smoothZoom({
+		    width: 300,
+		    height: 300
+		});
+		*/
+
 		//Backbone Collection:
 		App.devices = new App.Devices();
 
@@ -42,9 +49,21 @@ App.FloorPlanView = Backbone.View.extend({
 		var elementId = "#" + model.id;
 
 		if($(elementId).length != 0){
-			var deviceView = new App.DeviceView({model: model});
-			deviceView.setElement($(elementId)[0]);
-			deviceView.render();
+			var deviceView;
+
+			switch(model.get("type")){
+				case "light":
+					deviceView = new App.LightView({model: model});
+					break;
+				case "motionsensor":
+					deviceView = new App.MotionsensorView({model: model});
+					break;
+			}
+
+			if(deviceView){
+				deviceView.setElement($(elementId)[0]);
+				deviceView.render();
+			}
 		}
 		
 	},
@@ -55,13 +74,17 @@ App.FloorPlanView = Backbone.View.extend({
 });
 
 App.DeviceView = Backbone.View.extend({
-	tagName: "img",
-
 	initialize: function(){
 		this.model.on('change', this.render, this); //als model veranderd
-	},
-	
+	}
+});
+
+App.LightView = App.DeviceView.extend({
+	tagName: "img",
+
 	render: function(){
+		$(this.el).attr("title", this.model.get("name"));
+
 		var imagesource = $(this.el).attr("src");
 		imagesource = imagesource.replace(/_off.svg|_on.svg/i, "_" + this.model.get("state") + ".svg");
 		$(this.el).attr("src", imagesource);
@@ -69,6 +92,21 @@ App.DeviceView = Backbone.View.extend({
 		return this;
 	}
 });
+
+App.MotionsensorView = App.DeviceView.extend({
+	tagName: "img",
+
+	render: function(){
+		$(this.el).attr("title", this.model.get("name"));
+
+		var imagesource = $(this.el).attr("src");
+		imagesource = imagesource.replace(/_movement.svg|_nothing.svg/i, "_" + this.model.get("state") + ".svg");
+		$(this.el).attr("src", imagesource);
+		
+		return this;
+	}
+});
+
 
 
 App.Device = Backbone.Model.extend({
